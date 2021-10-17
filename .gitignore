@@ -1,0 +1,8 @@
+*/target
+#.gitignore
+.idea
+.settings
+.project
+.classpath
+#common-api/common-api.iml
+**/*.iml
