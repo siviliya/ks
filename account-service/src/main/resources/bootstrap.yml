@@ -1,0 +1,9 @@
+server:
+  port: 20020
+  servlet:
+    context-path: /account-api
+spring:
+  application:
+    name: account
+  profiles:
+    active: "@profile.active@"
