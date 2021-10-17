@@ -12,10 +12,107 @@
     <artifactId>account-service</artifactId>
 
     <dependencies>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
     </dependencies>
+
+    <build>
+
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                    <mainClass>com.sevia.kc.account.AccountServiceApp</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>bootstrap.yml</include>
+                    <include>bootstrap-${profile.active}.yml</include>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+
+    </build>
+
+    <profiles>
+
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <filters>
+                    <filter>src/main/resources/bootstrap-dev.yml</filter>
+                </filters>
+            </build>
+            <properties>
+                <profile.active>dev</profile.active>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>test</id>
+            <build>
+                <filters>
+                    <filter>src/main/resources/bootstrap-test.yml</filter>
+                </filters>
+            </build>
+            <properties>
+                <profile.active>test</profile.active>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>preprod</id>
+            <build>
+                <filters>
+                    <filter>src/main/resources/bootstrap-preprod.yml</filter>
+                </filters>
+            </build>
+            <properties>
+                <profile.active>preprod</profile.active>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>prod</id>
+            <build>
+                <filters>
+                    <filter>src/main/resources/bootstrap-prod.yml</filter>
+                </filters>
+            </build>
+            <properties>
+                <profile.active>prod</profile.active>
+            </properties>
+        </profile>
+
+    </profiles>
 
 </project>
