@@ -12,6 +12,8 @@
     <modules>
         <module>account-service</module>
         <module>platform-manage</module>
+        <module>common-api</module>
+        <module>common</module>
     </modules>
 
     <properties>
